@@ -1,0 +1,15 @@
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: config-server
+    restart: unless-stopped
+    ports:
+      - "${SERVER_PORT:-8888}:8888"
+    networks:
+      - parts-management-net
+
+networks:
+  parts-management-net:
+    external: true

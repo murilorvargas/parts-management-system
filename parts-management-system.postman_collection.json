@@ -1,0 +1,204 @@
+{
+  "info": {
+    "name": "Parts Management System",
+    "description": "Coleção de requests para o Parts Management System (part-service, client-service, representative-service), acessados exclusivamente através do Gateway (gateway-service).\n\nAntes de rodar, ajuste a variável da coleção se necessário:\n- baseUrlGateway (default http://localhost:8080)\n\nNenhuma outra porta deve ser usada para testar as APIs — tudo passa pelo Gateway em /api/*.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrlGateway", "value": "http://localhost:8080", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "part-service (via Gateway)",
+      "item": [
+        {
+          "name": "Create Part",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identificationNumber\": \"PC-001\",\n  \"name\": \"Parafuso M8\",\n  \"description\": \"Parafuso sextavado M8x30\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrlGateway}}/api/parts",
+              "host": ["{{baseUrlGateway}}"],
+              "path": ["api", "parts"]
+            }
+          }
+        },
+        {
+          "name": "Get Part by Identification Number",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlGateway}}/api/parts/PC-001",
+              "host": ["{{baseUrlGateway}}"],
+              "path": ["api", "parts", "PC-001"]
+            }
+          }
+        },
+        {
+          "name": "List Parts (search by name piece)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlGateway}}/api/parts?name=Parafuso&page=1&pageSize=30",
+              "host": ["{{baseUrlGateway}}"],
+              "path": ["api", "parts"],
+              "query": [
+                { "key": "name", "value": "Parafuso" },
+                { "key": "page", "value": "1" },
+                { "key": "pageSize", "value": "30" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "List All Parts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlGateway}}/api/parts",
+              "host": ["{{baseUrlGateway}}"],
+              "path": ["api", "parts"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "client-service (via Gateway)",
+      "item": [
+        {
+          "name": "Create Client",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cpf\": \"12345678901\",\n  \"name\": \"Maria Souza\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrlGateway}}/api/clients",
+              "host": ["{{baseUrlGateway}}"],
+              "path": ["api", "clients"]
+            }
+          }
+        },
+        {
+          "name": "Get Client by CPF",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlGateway}}/api/clients/12345678901",
+              "host": ["{{baseUrlGateway}}"],
+              "path": ["api", "clients", "12345678901"]
+            }
+          }
+        },
+        {
+          "name": "List Clients (search by name piece)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlGateway}}/api/clients?name=Maria&page=1&pageSize=30",
+              "host": ["{{baseUrlGateway}}"],
+              "path": ["api", "clients"],
+              "query": [
+                { "key": "name", "value": "Maria" },
+                { "key": "page", "value": "1" },
+                { "key": "pageSize", "value": "30" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "List All Clients",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlGateway}}/api/clients",
+              "host": ["{{baseUrlGateway}}"],
+              "path": ["api", "clients"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "representative-service (via Gateway)",
+      "item": [
+        {
+          "name": "Create Representative",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cpf\": \"98765432100\",\n  \"name\": \"João Pereira\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrlGateway}}/api/representatives",
+              "host": ["{{baseUrlGateway}}"],
+              "path": ["api", "representatives"]
+            }
+          }
+        },
+        {
+          "name": "Get Representative by CPF",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlGateway}}/api/representatives/98765432100",
+              "host": ["{{baseUrlGateway}}"],
+              "path": ["api", "representatives", "98765432100"]
+            }
+          }
+        },
+        {
+          "name": "List Representatives (search by name piece)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlGateway}}/api/representatives?name=Jo%C3%A3o&page=1&pageSize=30",
+              "host": ["{{baseUrlGateway}}"],
+              "path": ["api", "representatives"],
+              "query": [
+                { "key": "name", "value": "João" },
+                { "key": "page", "value": "1" },
+                { "key": "pageSize", "value": "30" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "List All Representatives",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlGateway}}/api/representatives",
+              "host": ["{{baseUrlGateway}}"],
+              "path": ["api", "representatives"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

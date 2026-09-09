@@ -1,0 +1,19 @@
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: gateway-service
+    restart: unless-stopped
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      CONFIG_SERVER_URL: http://config-server:8888
+      EUREKA_URI: http://discovery-server:8761/eureka/
+    ports:
+      - "${SERVER_PORT:-8080}:8080"
+    networks:
+      - parts-management-net
+
+networks:
+  parts-management-net:
+    external: true
