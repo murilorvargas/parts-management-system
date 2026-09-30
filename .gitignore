@@ -15,3 +15,6 @@ target/
 
 # OS
 .DS_Store
+
+# Claude Code workflow state (local only)
+.claude/

@@ -42,6 +42,10 @@ echo "Subindo representative-service..."
 echo "Subindo gateway-service (Gateway)..."
 (cd gateway-service/infrastructure && docker compose -p gateway-service up -d --build)
 
+echo "Subindo observability (Prometheus + Grafana)..."
+[ -f "observability/.env" ] || cp "observability/.env.example" "observability/.env"
+(cd observability && docker compose -p observability up -d)
+
 echo ""
 echo "Tudo no ar. Teste apenas via Gateway:"
 echo "  gateway-service       -> http://localhost:8080"
@@ -52,3 +56,7 @@ echo "Endpoints (via Gateway):"
 echo "  http://localhost:8080/api/parts"
 echo "  http://localhost:8080/api/clients"
 echo "  http://localhost:8080/api/representatives"
+echo ""
+echo "Observabilidade:"
+echo "  Prometheus            -> http://localhost:9090"
+echo "  Grafana               -> http://localhost:3000 (login padrao admin/admin)"

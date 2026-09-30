@@ -1,4 +1,5 @@
 #!/bin/bash
+(cd observability && docker compose -p observability down)
 (cd gateway-service/infrastructure && docker compose -p gateway-service down)
 (cd representative-service/infrastructure && docker compose -p representative-service down)
 (cd client-service/infrastructure && docker compose -p client-service down)
