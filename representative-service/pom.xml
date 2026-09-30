@@ -110,6 +110,49 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<version>1.17.4</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.pitest</groupId>
+						<artifactId>pitest-junit5-plugin</artifactId>
+						<version>1.2.1</version>
+					</dependency>
+					<!-- pitest-junit5-plugin 1.2.1 transitively pulls junit-platform-launcher 1.9.2,
+					     which conflicts with the JUnit 6 platform used by this project's tests
+					     (spring-boot-starter-parent 4.0.2 manages junit-jupiter 6.0.2). Declaring
+					     it explicitly here overrides the transitive version via nearest-wins so the
+					     plugin's classpath uses a launcher aligned with junit-platform-engine 6.0.2. -->
+					<dependency>
+						<groupId>org.junit.platform</groupId>
+						<artifactId>junit-platform-launcher</artifactId>
+						<version>6.0.2</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<targetClasses>
+						<param>com.representative.representative_service.application.services.*</param>
+						<param>com.representative.representative_service.api.controllers.*</param>
+						<param>com.representative.representative_service.infrastructure.jpa.*RepositoryImpl</param>
+						<param>com.representative.representative_service.infrastructure.jpa.JpaUnitOfWork</param>
+						<param>com.representative.representative_service.infrastructure.jpa.specifications.*</param>
+					</targetClasses>
+					<targetTests>
+						<param>com.representative.representative_service.*</param>
+					</targetTests>
+					<mutationThreshold>70</mutationThreshold>
+					<coverageThreshold>80</coverageThreshold>
+					<timestampedReports>false</timestampedReports>
+					<outputFormats>
+						<outputFormat>HTML</outputFormat>
+					</outputFormats>
+					<threads>1</threads>
+					<timeoutConstant>10000</timeoutConstant>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
